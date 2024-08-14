@@ -5,6 +5,7 @@ class CourseSerializer(serializers.ModelSerializer):
     first_name = serializers.ReadOnlyField(source='user.first_name')
     last_name = serializers.ReadOnlyField(source='user.last_name')
     department=serializers.ReadOnlyField(source='department.category')
+    department_id=serializers.ReadOnlyField(source='department.id')
     # user = str(first_name+' '+last_name)
     class Meta:
         model = CourseModel

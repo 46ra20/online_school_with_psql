@@ -8,7 +8,7 @@ ACCOUNT_TYPE = [
 
 class UserRegistrarionModel(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='account/image')
+    image = models.URLField(blank=True,null=True)
     account_type = models.CharField(choices=ACCOUNT_TYPE,max_length=10)
 
     def __str__(self) -> str:
