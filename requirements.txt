@@ -11,3 +11,4 @@ python-dotenv
 pytz
 sqlparse
 typing_extensions
+dj-database-url
