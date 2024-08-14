@@ -125,8 +125,7 @@ DATABASES = {
     # }
     'default':dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5433/postgres',
-        conn_max_age=600
+        default='postgresql://online_school_user:DmL0oCzPVsnigbMiWfmuot2JkkDZx7d7@dpg-cqu5k1aj1k6c73dpf1a0-a.singapore-postgres.render.com/online_school'
     )
 }
 
