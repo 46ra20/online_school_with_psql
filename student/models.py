@@ -9,6 +9,7 @@ USER_TRATING = [
     ('2','★★'),
     ('3','★★★'),
     ('4','★★★★'),
+    ('5','★★★★★')
 ]
 
 class ReviewModel(models.Model):
