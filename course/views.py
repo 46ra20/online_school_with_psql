@@ -66,6 +66,7 @@ class AllCourseView(APIView):
             # page = pagination.paginate_queryset(serializer.data,request)
             # return pagination.get_paginated_response(page)
         serializer = CourseSerializer(courses,many=True)
+        # print(serializer.data[0]['user'])
         return Response(serializer.data)
 
             
