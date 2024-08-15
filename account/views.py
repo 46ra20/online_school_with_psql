@@ -20,7 +20,10 @@ class UserRegistrationView(APIView):
 
     def post(self,request):
         serializer = self.serializer_class(data=request.data)
-
+        # print(request.data)
+        # print(serializer.is_valid())
+        # if(serializer.errors):
+        #     return Response(serializer.errors)
         if serializer.is_valid():
             user = serializer.save()
             print(user)
@@ -30,10 +33,13 @@ class UserRegistrationView(APIView):
             email_subject = 'Confirm your email.'
             confirm_link = f'https://online-school-lr66.onrender.com/account/active/{uid}/{token}/'
             email_body=render_to_string('./account/confirm_email.html',{'confirm_link':confirm_link})
-            email = EmailMultiAlternatives(email_subject,'',to=[user[0].email])
-            email.attach_alternative(email_body,'text/html')
-            email.send()
-
+            try:
+                email = EmailMultiAlternatives(email_subject,'',to=[user[0].email])
+                email.attach_alternative(email_body,'text/html')
+                email.send()
+            except:
+                Response('Email is not valid...')
+            
             return Response('Done')
         return Response('Sorry')
     

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import CourseModel,CourseCategory
-from .serializers import CourseSerializer,CourseCategorySerializer
+from .serializers import CourseSerializer,CourseCategorySerializer,PostCourseSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser
@@ -94,13 +94,13 @@ class CourseViewForTeacher(APIView):
         print('course',teacher)
         if teacher is not None and teacher.is_staff:
             
-            serializer = CourseSerializer(data=request.data)
-            print(serializer)
-            print(request.data)
-            # print(serializer.is_valid())
+            serializer = PostCourseSerializer(data=request.data)
+            # print(serializer)
+            # print(request.data)
+            print(serializer.is_valid())
             if serializer.is_valid():
                 serializer.save()
-                print(serializer.data)
+                # print(serializer.data)
                 return Response(serializer.data,status=status.HTTP_201_CREATED)
             else:
                 return Response(serializer.errors,status=status.HTTP_501_NOT_IMPLEMENTED)

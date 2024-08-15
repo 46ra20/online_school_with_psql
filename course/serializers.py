@@ -16,3 +16,12 @@ class CourseCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseCategory
         fields = ['id','category']
+
+
+
+class PostCourseSerializer(serializers.ModelSerializer):
+    # user = str(first_name+' '+last_name)
+    class Meta:
+        model = CourseModel
+        fields='__all__'
+        # exclude=('user',)
