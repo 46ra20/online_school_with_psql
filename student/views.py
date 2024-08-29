@@ -63,7 +63,7 @@ class ReviewView(viewsets.ViewSet):
             serializer.save()
             return Response({"success":"comment push successfully"})
         print(serializer.errors)
-        return Response({"error":"someting wrong plase try agin"})
+        return Response({"error":"Something wrong please try agin"})
         
 
 class CourseEnrolView(viewsets.ViewSet):
@@ -89,14 +89,15 @@ class CourseEnrolView(viewsets.ViewSet):
         return Response({"data":serializer.data,"course_details":course_details})
 
     def create(self,request):
-        # enroled_courses=CourseEnrolModel
-        print(request.data['enrol_course'],request.data['enrol_by'])
+
+        courseNo = request.data['enrol_course']
+        enrolBy = request.data['enrol_by']
         try:
-            is_enroled = CourseEnrolModel.objects.filter(enrol_course=request.data['enrol_course'],enrol_by=request.data['enrol_by'])
+            is_enroled = CourseEnrolModel.objects.filter(enrol_course=courseNo,enrol_by=enrolBy)
         except(CourseEnrolModel.DoesNotExist):
             is_enroled=False
-        # print(is_enroled)
-        if len(is_enroled) == 0:
+        print(is_enroled)
+        if not is_enroled:
             serializer =CourseEnrlSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
@@ -107,7 +108,7 @@ class CourseEnrolView(viewsets.ViewSet):
         try:
             course = CourseEnrolModel.objects.get(pk=id)
             course.delete()
-            return Response({'success':'Course Unenroled successfully'})
+            return Response({'success':'Course Unenrolled successfully'})
         except(CourseEnrolModel.DoesNotExist):
             course=None
-            return Response({'error':'Operation Faild'})
+            return Response({'error':'Operation Failed'})
